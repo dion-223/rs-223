@@ -48,21 +48,37 @@ export default function LiveGame() {
       <nav className="bg-neutral-900 fixed w-full z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link href="https://rushystreams.com">
-              <a className="text-2xl font-bold text-white">RushyStreams</a>
+            <Link href="https://rushystreams.com" className="text-2xl font-bold text-white">
+              RushyStreams
             </Link>
             <div className="hidden md:block flex-grow">
               <div className="flex items-baseline justify-center space-x-6">
-                <a href="https://hoopystreams.com" className="hover:text-red-600 px-3 py-2 text-sm font-medium">NBA</a>
-                <a href="https://hoopystreams.com" className="hover:text-red-600 px-3 py-2 text-sm font-medium">NCAA</a>
-                <a href="https://rushystreams.com" className="hover:text-red-600 px-3 py-2 text-sm font-medium">NFL</a>
-                <a href="https://rushystreams.com" className="hover:text-red-600 px-3 py-2 text-sm font-medium">CFB</a>
-                <a href="https://pitchystreams.com" className="hover:text-red-600 px-3 py-2 text-sm font-medium">MLB</a>
-                <a href="https://footystreams.xyz" className="hover:text-red-600 px-3 py-2 text-sm font-medium">SOCCER</a>
-                <a href="https://trackystreams.com" className="hover:text-red-600 px-3 py-2 text-sm font-medium">F1</a>
-                <a href="https://fightystreams.com" className="hover:text-red-600 px-3 py-2 text-sm font-medium">UFC</a>
+                <Link href="https://hoopystreams.com">
+                  <span className="hover:text-red-600 px-3 py-2 text-sm font-medium">NBA</span>
+                </Link>
+                <Link href="https://hoopystreams.com">
+                  <span className="hover:text-red-600 px-3 py-2 text-sm font-medium">NCAA</span>
+                </Link>
+                <Link href="https://rushystreams.com">
+                  <span className="hover:text-red-600 px-3 py-2 text-sm font-medium">NFL</span>
+                </Link>
+                <Link href="https://rushystreams.com">
+                  <span className="hover:text-red-600 px-3 py-2 text-sm font-medium">CFB</span>
+                </Link>
+                <Link href="https://pitchystreams.com">
+                  <span className="hover:text-red-600 px-3 py-2 text-sm font-medium">MLB</span>
+                </Link>
+                <Link href="https://footystreams.xyz">
+                  <span className="hover:text-red-600 px-3 py-2 text-sm font-medium">SOCCER</span>
+                </Link>
+                <Link href="https://trackystreams.com">
+                  <span className="hover:text-red-600 px-3 py-2 text-sm font-medium">F1</span>
+                </Link>
+                <Link href="https://fightystreams.com">
+                  <span className="hover:text-red-600 px-3 py-2 text-sm font-medium">UFC</span>
+                </Link>
                 <Link href="/blog">
-                  <a className="hover:text-red-600 px-3 py-2 text-sm font-medium">BLOG</a>
+                  <span className="hover:text-red-600 px-3 py-2 text-sm font-medium">BLOG</span>
                 </Link>
               </div>
             </div>
@@ -87,22 +103,21 @@ export default function LiveGame() {
           <p className="text-gray-400 text-sm mt-2">Select your preferred server below</p>
         </div>
 
-        <div id="stream-container" className="w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center">
           {!found ? (
             <div className="text-center text-gray-400 py-8">
               Stream not found.
             </div>
           ) : (
             <>
-              <div id="server-buttons" className="flex flex-wrap justify-center gap-4 mb-6">
+              <div className="flex flex-wrap justify-center gap-4 mb-6">
                 <button onClick={() => setCurrentStream(embed1)} className="px-6 py-2 rounded-lg bg-neutral-800 hover:bg-red-600 transition duration-300">Server 1</button>
                 <button onClick={() => setCurrentStream(embed2)} className="px-6 py-2 rounded-lg bg-neutral-800 hover:bg-red-600 transition duration-300">Server 2</button>
                 <button onClick={() => setCurrentStream(embed3)} className="px-6 py-2 rounded-lg bg-neutral-800 hover:bg-red-600 transition duration-300">Server 3</button>
               </div>
               <div className="flex flex-col md:flex-row justify-between w-full">
-                <div id="player-container" className="w-full flex justify-center">
+                <div className="w-full flex justify-center">
                   <iframe 
-                    id="stream-frame" 
                     src={currentStream}
                     className="w-full aspect-video rounded-xl border border-neutral-700 shadow-lg" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
