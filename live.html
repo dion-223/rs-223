@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Stream | HoopyStreams</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8J3FSRNC5H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8J3FSRNC5H');
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-black text-white">
+    <!-- Navbar -->
+    <nav class="bg-neutral-900 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="https://hoopystreams.com" class="text-2xl font-bold text-white">HoopyStreams</a>
+                <div class="hidden md:block flex-grow">
+                    <div class="flex items-baseline justify-center space-x-6">
+                        <a href="https://hoopystreams.com" class="hover:text-red-600 px-3 py-2 text-sm font-medium">NBA</a>
+                        <a href="https://hoopystreams.com" class="hover:text-red-600 px-3 py-2 text-sm font-medium">NCAA</a>
+                        <a href="https://rushystreams.com" class="hover:text-red-600 px-3 py-2 text-sm font-medium">NFL</a>
+                        <a href="https://rushystreams.com" class="hover:text-red-600 px-3 py-2 text-sm font-medium">CFB</a>
+                        <a href="https://battystreams.com" class="hover:text-red-600 px-3 py-2 text-sm font-medium">MLB</a>
+                        <a href="https://footystreams.com" class="hover:text-red-600 px-3 py-2 text-sm font-medium">SOCCER</a>
+                        <a href="https://trackystreams.com" class="hover:text-red-600 px-3 py-2 text-sm font-medium">F1</a>
+                        <a href="https://fightystreams.com" class="hover:text-red-600 px-3 py-2 text-sm font-medium">UFC</a>
+                        <a href="/blog" class="hover:text-red-600 px-3 py-2 text-sm font-medium">BLOG</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button type="button" class="text-white hover:text-red-600 p-2">
+                        <span class="sr-only">Open menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold">Live Stream</h1>
+            <p class="text-gray-400 text-sm mt-2">Select your preferred server below</p>
+        </div>
+
+        <div id="stream-container" class="w-full flex flex-col items-center">
+            <div id="server-buttons" class="flex flex-wrap justify-center gap-4 mb-6">
+                <button id="server1" class="px-6 py-2 rounded-lg bg-neutral-800 hover:bg-red-600 transition duration-300">Server 1</button>
+                <button id="server2" class="px-6 py-2 rounded-lg bg-neutral-800 hover:bg-red-600 transition duration-300">Server 2</button>
+                <button id="server3" class="px-6 py-2 rounded-lg bg-neutral-800 hover:bg-red-600 transition duration-300">Server 3</button>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between w-full">
+                <div id="player-container" class="w-full flex justify-center">
+                    <iframe id="stream-frame" class="w-full aspect-video rounded-xl border border-neutral-700 shadow-lg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameId = urlParams.get("game");
+
+        fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vR8F07x4RufUWoiIc5_LwyFZZqaDhiJLuAV9S-a4b8gDVJxEPUDRyCmpH5WuWs15QNu36kpGbjF-oFP/pub?output=csv")
+            .then(res => res.text())
+            .then(data => {
+                const rows = data.trim().split("\n").slice(1);
+                let found = false;
+
+                rows.forEach(row => {
+                    const [id, embed1, embed2, embed3] = row.split(",");
+                    if (id.trim().toLowerCase() === gameId.trim().toLowerCase()) {
+                        found = true;
+
+                        const frame = document.getElementById("stream-frame");
+                        frame.src = embed1;
+
+                        document.getElementById("server1").addEventListener("click", () => {
+                            frame.src = embed1;
+                        });
+                        document.getElementById("server2").addEventListener("click", () => {
+                            frame.src = embed2;
+                        });
+                        document.getElementById("server3").addEventListener("click", () => {
+                            frame.src = embed3;
+                        });
+                    }
+                });
+
+                if (!found) {
+                    document.getElementById("stream-frame").src = "";
+                    document.getElementById("stream-container").innerText = "Stream not found.";
+                }
+            })
+            .catch(err => {
+                console.error("Failed to load embed sheet:", err);
+            });
+    </script>
+</body>
+</html>
