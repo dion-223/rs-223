@@ -61,7 +61,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         const gameId = urlParams.get("game");
 
-        fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vR8F07x4RufUWoiIc5_LwyFZZqaDhiJLuAV9S-a4b8gDVJxEPUDRyCmpH5WuWs15QNu36kpGbjF-oFP/pub?output=csv")
+        fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vSfWqB1cJc39ig5OnXYgLWPLlPLQojVE1lOir59KYrBhSdr8xjJUUwUedXGMBChOdW-nIy9pzorWxIe/pub?output=csv")
             .then(res => res.text())
             .then(data => {
                 const rows = data.trim().split("\n").slice(1);
